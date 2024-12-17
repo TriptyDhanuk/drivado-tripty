@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import scan from "../../assets/scan.png"
+import scan from "../../assets/scan.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faCheckCircle, 
@@ -11,9 +11,11 @@ import {
   faEnvelope, 
   faPhoneAlt 
 } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom'; 
 
 const BookingConfirmation = () => {
   const [bookingData, setBookingData] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const storedBookingData = localStorage.getItem("bookingData");
@@ -29,6 +31,10 @@ const BookingConfirmation = () => {
   if (!bookingData) {
     return <div>Loading...</div>;
   }
+
+  const handleManageBooking = () => {
+    navigate('/managebooking'); 
+  };
 
   return (
     <>
@@ -108,14 +114,17 @@ const BookingConfirmation = () => {
                 </p>
               </div>
               <div className="flex flex-col gap-6">
-              <button className="flex items-center bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">
-                <FontAwesomeIcon icon={faDownload} className="mr-2" />
-              Download Invoice
-              </button>
-              <a href="/managebooking"className="flex items-center bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 hover:text-white">
-                <FontAwesomeIcon icon={faDownload} className="mr-2" />
-              ManageBooking
-              </a>
+                <button className="flex items-center bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">
+                  <FontAwesomeIcon icon={faDownload} className="mr-2" />
+                  Download Invoice
+                </button>
+                <button 
+                  onClick={handleManageBooking} 
+                  className="flex items-center bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600"
+                >
+                  <FontAwesomeIcon icon={faDownload} className="mr-2" />
+                  Manage Booking
+                </button>
               </div>
             </div>
           </div>
